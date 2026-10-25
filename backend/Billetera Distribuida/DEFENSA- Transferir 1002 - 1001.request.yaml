@@ -1,0 +1,15 @@
+$kind: http-request
+name: "DEFENSA: Transferir 1002 -> 1001"
+url: "{{baseUrl}}/api/transferencias"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "origen": "1002",
+      "destino": "1001",
+      "monto": 25.5
+    }
+order: 5000

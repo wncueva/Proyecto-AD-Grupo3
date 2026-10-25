@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/cuentas/1001/deposito"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "monto": 50
+    }
+order: 2000

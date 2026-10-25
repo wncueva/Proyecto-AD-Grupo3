@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:3000/api/cuentas/1002
+method: GET
+order: 3000

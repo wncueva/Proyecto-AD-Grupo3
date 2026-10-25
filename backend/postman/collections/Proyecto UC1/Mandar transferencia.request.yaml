@@ -1,0 +1,16 @@
+$kind: http-request
+description: ""
+url: http://localhost:3000/api/transferencias
+method: POST
+body:
+  type: json
+  content: "   {\r
+
+    \     \"origen\": \"1002\",\r
+
+    \     \"destino\": \"1001\",\r
+
+    \     \"monto\": 25.5\r
+
+    \   }"
+order: 1000

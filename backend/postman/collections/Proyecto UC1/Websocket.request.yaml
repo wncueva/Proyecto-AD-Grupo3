@@ -1,0 +1,7 @@
+$kind: websocket-request
+description: ""
+url: ws://localhost:3000/ws?cuenta=1001
+queryParams:
+  cuenta: "1001"
+settings: {}
+order: 2000

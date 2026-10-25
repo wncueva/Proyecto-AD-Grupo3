@@ -1,0 +1,9 @@
+$kind: http-request
+url: "{{baseUrl}}/api/admin/reset"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: "{}"
+order: 8000

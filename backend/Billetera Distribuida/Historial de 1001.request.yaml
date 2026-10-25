@@ -1,0 +1,6 @@
+$kind: http-request
+url: "{{baseUrl}}/api/cuentas/1001/transacciones"
+method: GET
+headers:
+  Content-Type: application/json
+order: 7000

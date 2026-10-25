@@ -1,0 +1,12 @@
+$kind: http-request
+url: "{{baseUrl}}/api/cuentas/1001/retiro"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "monto": 20
+    }
+order: 3000

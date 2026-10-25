@@ -1,0 +1,15 @@
+$kind: http-request
+url: "{{baseUrl}}/api/servicios/pagar"
+method: POST
+headers:
+  Content-Type: application/json
+body:
+  type: text
+  content: |-
+    {
+      "cuenta": "1001",
+      "servicio": "LUZ",
+      "codigoContrato": "CNEL-12345",
+      "monto": 18.75
+    }
+order: 6000
