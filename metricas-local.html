@@ -1,0 +1,41 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Metricas Billetera (http://localhost:3000)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>body{font-family:Arial,sans-serif;margin:24px;color:#111;background:#fff}h1{font-size:20px}h2{font-size:16px;margin-top:32px}
+.box{max-width:760px;background:#fff;padding:12px;border:1px solid #ddd;border-radius:8px}table{border-collapse:collapse;margin-top:8px;font-size:13px}
+td,th{border:1px solid #bbb;padding:4px 10px;text-align:center}th{background:#eef}</style></head><body>
+<h1>Metricas de rendimiento - Billetera Movil Distribuida</h1>
+<p>Servidor: <b>http://localhost:3000</b> &middot; Fecha: 25/10/2026, 6:30:37 p. m. &middot; Muestras por operacion: 30</p>
+
+<h2>Grafico 1. Latencia REST por operacion (ms)</h2><div class="box"><canvas id="g1"></canvas></div>
+<table><tr><th>Operacion</th><th>Promedio</th><th>p50</th><th>p95</th><th>Min</th><th>Max</th></tr><tr><td>Consultar saldo</td><td>4.7</td><td>3.66</td><td>10.39</td><td>1.83</td><td>13.63</td></tr><tr><td>Deposito</td><td>6.1</td><td>5.61</td><td>12.53</td><td>2.9</td><td>13.69</td></tr><tr><td>Retiro</td><td>5.3</td><td>5.42</td><td>8.09</td><td>2.18</td><td>8.2</td></tr><tr><td>Transferencia</td><td>8.05</td><td>8.09</td><td>12.21</td><td>5.11</td><td>14.21</td></tr><tr><td>Pago de servicio</td><td>6.85</td><td>6.21</td><td>9.76</td><td>3.73</td><td>13.31</td></tr></table>
+
+<h2>Grafico 2. Respuesta REST vs entrega por WebSocket (ms)</h2><div class="box"><canvas id="g2"></canvas></div>
+<p>Respuesta REST al emisor: 9.2 ms &middot; Entrega WebSocket al receptor: 7.54 ms (p95 10.29 ms) &middot; Mensajes perdidos: 0</p>
+
+<h2>Grafico 3. Concurrencia REST: latencia y throughput</h2><div class="box"><canvas id="g3"></canvas></div>
+<table><tr><th>Peticiones simultaneas</th><th>Exitosas</th><th>Latencia prom. (ms)</th><th>Throughput (req/s)</th><th>Saldo consistente</th></tr><tr><td>1</td><td>1/1</td><td>3.59</td><td>274.91</td><td>Si</td></tr><tr><td>5</td><td>5/5</td><td>11.84</td><td>281.04</td><td>Si</td></tr><tr><td>10</td><td>10/10</td><td>26.52</td><td>221.89</td><td>Si</td></tr><tr><td>25</td><td>25/25</td><td>64.02</td><td>229.08</td><td>Si</td></tr><tr><td>50</td><td>50/50</td><td>121.18</td><td>230.09</td><td>Si</td></tr><tr><td>100</td><td>100/100</td><td>379.71</td><td>158.73</td><td>Si</td></tr></table>
+
+<h2>Grafico 4. Concurrencia WebSocket: clientes simultaneos vs latencia de entrega</h2><div class="box"><canvas id="g4"></canvas></div>
+<table><tr><th>Clientes</th><th>Entregados</th><th>Promedio (ms)</th><th>p95 (ms)</th><th>Max (ms)</th></tr><tr><td>1</td><td>3/3</td><td>16.27</td><td>29.86</td><td>29.86</td></tr><tr><td>10</td><td>30/30</td><td>12.96</td><td>15.84</td><td>15.94</td></tr><tr><td>25</td><td>75/75</td><td>12.78</td><td>17.73</td><td>19.34</td></tr><tr><td>50</td><td>150/150</td><td>10.23</td><td>12.7</td><td>14.65</td></tr><tr><td>100</td><td>300/300</td><td>18.2</td><td>27.54</td><td>31.07</td></tr></table>
+
+<script>
+const d = {"servidor":"http://localhost:3000","fecha":"25/10/2026, 6:30:37 p. m.","latenciaRest":{"Consultar saldo":{"n":30,"promedio":4.7,"p50":3.66,"p95":10.39,"min":1.83,"max":13.63},"Deposito":{"n":30,"promedio":6.1,"p50":5.61,"p95":12.53,"min":2.9,"max":13.69},"Retiro":{"n":30,"promedio":5.3,"p50":5.42,"p95":8.09,"min":2.18,"max":8.2},"Transferencia":{"n":30,"promedio":8.05,"p50":8.09,"p95":12.21,"min":5.11,"max":14.21},"Pago de servicio":{"n":30,"promedio":6.85,"p50":6.21,"p95":9.76,"min":3.73,"max":13.31}},"latenciaWs":{"respuestaRest":{"n":30,"promedio":9.2,"p50":9.05,"p95":12.69,"min":6.29,"max":14},"entregaWebSocket":{"n":30,"promedio":7.54,"p50":7.12,"p95":10.29,"min":4.07,"max":12.58},"perdidos":0},"concurrenciaRest":[{"concurrentes":1,"exitosas":1,"errores":0,"tiempoTotalMs":3.64,"latenciaPromedioMs":3.59,"throughputRps":274.91,"saldoEsperado":441,"saldoObtenido":441,"consistente":true},{"concurrentes":5,"exitosas":5,"errores":0,"tiempoTotalMs":17.79,"latenciaPromedioMs":11.84,"throughputRps":281.04,"saldoEsperado":446,"saldoObtenido":446,"consistente":true},{"concurrentes":10,"exitosas":10,"errores":0,"tiempoTotalMs":45.07,"latenciaPromedioMs":26.52,"throughputRps":221.89,"saldoEsperado":456,"saldoObtenido":456,"consistente":true},{"concurrentes":25,"exitosas":25,"errores":0,"tiempoTotalMs":109.13,"latenciaPromedioMs":64.02,"throughputRps":229.08,"saldoEsperado":481,"saldoObtenido":481,"consistente":true},{"concurrentes":50,"exitosas":50,"errores":0,"tiempoTotalMs":217.31,"latenciaPromedioMs":121.18,"throughputRps":230.09,"saldoEsperado":531,"saldoObtenido":531,"consistente":true},{"concurrentes":100,"exitosas":100,"errores":0,"tiempoTotalMs":630,"latenciaPromedioMs":379.71,"throughputRps":158.73,"saldoEsperado":631,"saldoObtenido":631,"consistente":true}],"concurrenciaWs":[{"clientes":1,"entregados":3,"esperados":3,"promedioMs":16.27,"p95Ms":29.86,"maxMs":29.86},{"clientes":10,"entregados":30,"esperados":30,"promedioMs":12.96,"p95Ms":15.84,"maxMs":15.94},{"clientes":25,"entregados":75,"esperados":75,"promedioMs":12.78,"p95Ms":17.73,"maxMs":19.34},{"clientes":50,"entregados":150,"esperados":150,"promedioMs":10.23,"p95Ms":12.7,"maxMs":14.65},{"clientes":100,"entregados":300,"esperados":300,"promedioMs":18.2,"p95Ms":27.54,"maxMs":31.07}]};
+const az = "#1E3A8A", vi = "#4F46E5", ve = "#16A34A", ro = "#DC2626", am = "#F59E0B";
+new Chart(g1, {type:"bar", data:{labels:Object.keys(d.latenciaRest), datasets:[
+  {label:"Promedio", data:Object.values(d.latenciaRest).map(v=>v.promedio), backgroundColor:az},
+  {label:"p95", data:Object.values(d.latenciaRest).map(v=>v.p95), backgroundColor:am}]},
+  options:{scales:{y:{beginAtZero:true,title:{display:true,text:"ms"}}}}});
+new Chart(g2, {type:"bar", data:{labels:["Promedio","p50","p95","Max"], datasets:[
+  {label:"Respuesta REST (emisor)", data:["promedio","p50","p95","max"].map(k=>d.latenciaWs.respuestaRest[k]), backgroundColor:vi},
+  {label:"Entrega WebSocket (receptor)", data:["promedio","p50","p95","max"].map(k=>d.latenciaWs.entregaWebSocket[k]), backgroundColor:ve}]},
+  options:{scales:{y:{beginAtZero:true,title:{display:true,text:"ms"}}}}});
+new Chart(g3, {data:{labels:d.concurrenciaRest.map(f=>f.concurrentes), datasets:[
+  {type:"bar", label:"Throughput (req/s)", data:d.concurrenciaRest.map(f=>f.throughputRps), backgroundColor:az, yAxisID:"y"},
+  {type:"line", label:"Latencia promedio (ms)", data:d.concurrenciaRest.map(f=>f.latenciaPromedioMs), borderColor:ro, backgroundColor:ro, yAxisID:"y1"}]},
+  options:{scales:{x:{title:{display:true,text:"Peticiones simultaneas"}}, y:{beginAtZero:true,title:{display:true,text:"req/s"}},
+  y1:{beginAtZero:true,position:"right",grid:{drawOnChartArea:false},title:{display:true,text:"ms"}}}}});
+new Chart(g4, {type:"line", data:{labels:d.concurrenciaWs.map(f=>f.clientes), datasets:[
+  {label:"Promedio (ms)", data:d.concurrenciaWs.map(f=>f.promedioMs), borderColor:ve, backgroundColor:ve},
+  {label:"Maximo (ms)", data:d.concurrenciaWs.map(f=>f.maxMs), borderColor:ro, backgroundColor:ro}]},
+  options:{scales:{x:{title:{display:true,text:"Clientes WebSocket conectados"}}, y:{beginAtZero:true,title:{display:true,text:"ms"}}}}});
+</script></body></html>
